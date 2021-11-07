@@ -11,9 +11,9 @@ public class Main {
 	private BufferedWriter bw;
 	
 	//Las 3 agujas de diamante (Torres)
-	private int[] a;
-	private int[] b;
-	private int[] c;
+	private int[] a; 
+	private int[] b; 
+	private int[] c; 
 
 	
 	
@@ -29,25 +29,34 @@ public class Main {
 		c = new int[1];
 	}
 
-	public static void main(String[] args) throws IOException {
-		Main m= new Main();
-		int line= Integer.parseInt(m.br.readLine());
+	public static void main(String[] args){
 		
-		m.stackRepeater(line);
+		try {
+			Main m= new Main();
+			int line= Integer.parseInt(m.br.readLine());
+			m.stackRepeater(line);
+			m.br.close();
+			m.bw.close();
+			System.out.println("El resultado fue exportado exitosamente en el archivo Hanoi_Towers_output con " + line + " casos");
+		} catch (NumberFormatException e) {
+			
+		} catch (IOException e) {
+			
+		} catch (NullPointerException e) {
+			
+		}
 
-		m.br.close();
-		m.bw.close();
-		System.out.println("El resultado fue exportado exitosamente en el archivo Hanoi_Towers_output con " + line + " casos");
+		
 	}
 	
 	//Agente que se encarga de sacar la informacion de la pila
 	//Este metodo tambien se encarga de repetir el metodo Hanoi en diferentes casos de numeros de discos
-	public void stackRepeater(int line) throws IOException {
+	public void stackRepeater(int line) throws  NumberFormatException, IOException {
 		if(line==0) {
 			return;
 		}else {
 			int numb= Integer.parseInt(br.readLine());
-			a[0]= numb;
+			a[0] = numb;
 			bw.write(a[0]+" "+b[0]+" "+c[0]+"\n");
 
 			hanoi(numb, a, b, c);
@@ -69,7 +78,6 @@ public class Main {
 			origen[0]--;
 			destino[0]++;
 			bw.write(a[0]+" "+b[0]+" "+c[0]+"\n");
-			return;
 			
 		}else {
 			hanoi(n-1, origen, destino, auxiliar);
