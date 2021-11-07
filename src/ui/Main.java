@@ -37,7 +37,7 @@ public class Main {
 
 		m.br.close();
 		m.bw.close();
-		System.out.println("El resultado fue exportado exitosamente en el archivo Hanoi_Towers_output");
+		System.out.println("El resultado fue exportado exitosamente en el archivo Hanoi_Towers_output con " + line + " casos");
 	}
 	
 	//Agente que se encarga de sacar la informacion de la pila
@@ -50,7 +50,7 @@ public class Main {
 			a[0]= numb;
 			bw.write(a[0]+" "+b[0]+" "+c[0]+"\n");
 
-			hanoi(numb, a, c, b);
+			hanoi(numb, a, b, c);
 			bw.write("\n");
 			a[0]=0;
 			b[0]=0;
@@ -63,8 +63,8 @@ public class Main {
 
 	
 	//Hanoi Towers = 2^n-1 donde n es el número de discos
-	//Son 3 torres: origen, destino y auxiliar
-	public void hanoi(int n, int[] origen, int[] destino, int[] auxiliar) throws IOException {
+	//Son 3 torres: origen, auxiliar y destino
+	public void hanoi(int n, int[] origen, int[] auxiliar, int[] destino) throws IOException {
 		if(n==1) {
 			origen[0]--;
 			destino[0]++;
@@ -72,11 +72,11 @@ public class Main {
 			return;
 			
 		}else {
-			hanoi(n-1,origen,auxiliar, destino);
+			hanoi(n-1, origen, destino, auxiliar);
 			origen[0]--;
 			destino[0]++;
 			bw.write(a[0]+" "+b[0]+" "+c[0]+"\n");
-			hanoi(n-1, auxiliar, destino, origen);
+			hanoi(n-1, auxiliar, origen, destino);
 		}
 
 	}
